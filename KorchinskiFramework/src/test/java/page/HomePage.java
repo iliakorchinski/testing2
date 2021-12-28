@@ -4,6 +4,8 @@ import model.Route;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -11,7 +13,9 @@ import utils.Waits;
 
 import java.nio.charset.StandardCharsets;
 
+
 public class HomePage extends AbstractPage{
+    private static final Logger logger = LogManager.getRootLogger();
     private static final String PAGE_URL = "https://all.accor.com/russia/index.ru.shtml";
     private static final String RESULT_URL_PART = "https://all.accor.com/ssr/app/accor";
     private static final String COOKIE_BUTTON = "//*[@id=\"onetrust-accept-btn-handler\"]";
@@ -61,6 +65,7 @@ public class HomePage extends AbstractPage{
 
     public HomePage openPage(){
         driver.get(PAGE_URL);
+        logger.info("Home page opened");
         return this;
     }
 
@@ -89,6 +94,7 @@ public class HomePage extends AbstractPage{
 
     public ResultPage redirectResultPage(){
         Waits.isPageUrlContains(driver, RESULT_URL_PART);
+        logger.info("Redirect to result page");
         return new ResultPage(driver);
     }
 
